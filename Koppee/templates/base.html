@@ -1,0 +1,152 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Coffee</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href={% static "templates\css\linearicons.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\font-awesome.min.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\bootstrap.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\magnific-popup.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\nice-select.css" %}>					
+			<link rel="stylesheet" href={% static "templates\css\animate.min.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\owl.carousel.css" %}>
+			<link rel="stylesheet" href={% static "templates\css\main.css" %}>
+		</head>
+		<body>
+
+<header id="header" id="home">
+    
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo" style="display: flex; align-items: center;">
+                <a href="index.html">
+                    <img src={% static "templates\img\hehehe.png" %} 
+                         alt="Logo" 
+                         style="max-height: 60px; width: auto;">
+                </a>
+            </div>
+            <nav id="nav-menu-container" style="margin-left: 3px; margin-right: 3px";>
+                <ul class="nav-menu">
+					<li class="menu-active"><a href="{% url 'index' %}">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#coffee">Coffee</a></li>
+					<li><a href="#review">Review</a></li>
+					<li><a href="{% url 'my_orders' %}">My Orders</a></li>  
+					<li><a href="{% url 'contact' %}">Contact</a></li>     
+					<li><a href="{% url 'login' %}">Login</a></li>
+					<li><a href="{% url 'logout' %}">Logout</a></li>
+				</ul>
+
+            </nav>
+        </div>
+    </div>
+</header>
+{% block "content" %}
+
+
+
+{% endblock "content"  %}
+
+
+<!-- start footer Area -->		
+<footer class="footer-area section-gap">
+	<div class="container">
+		<div class="row">
+			<!-- About Us -->
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>☕About Crimson Beans</h6>
+					<p style="color: white;">
+						Here, we craft every cup with ❤️ and passion. Whether you're here for your daily caffeine fix or a relaxing break, we've got something brewing just for you!
+					</p>
+					<p class="footer-text" style="color: white;" >
+						&copy;<script>document.write(new Date().getFullYear());</script> CoffeeBean | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> and ☕ by our baristas.
+					</p>								
+				</div>
+			</div>
+
+			<!-- Newsletter -->
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>📬Join Our Newsletter</h6>
+					<p style="color: white;">Get the latest brews, deals, and cozy updates straight to your inbox!</p>
+					<div id="mc_embed_signup">
+						<form target="_blank" novalidate="true" action="https://example.com/subscribe" method="get" class="form-inline">
+							<input class="form-control" name="EMAIL" placeholder="Enter your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email'" required="" type="email">
+							<button class="click-btn btn btn-default"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+							<div style="position: absolute; left: -5000px;">
+								<input name="hidden-field" tabindex="-1" value="" type="text">
+							</div>
+							<div class="info pt-20"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Opening Hours -->
+			<div class="footer-top-right col-lg-2 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>🕒Opening Hours</h6>
+					<ul style="list-style-type: none; padding-left: 0;">
+						<li>Mon–Fri: <br><strong>8am – 2pm</strong></li>
+						<li>Sat–Sun: <br><strong>11am – 4pm</strong></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Social Media -->
+			<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+				<div class="single-footer-widget">
+					<h6>📱Follow Us</h6>
+					<p style="color: white;">Stay connected for more coffee love</p>
+					<div class="footer-social d-flex align-items-center">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-instagram"></i></a>
+						<a href="#"><i class="fa fa-pinterest"></i></a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</footer>	
+<!-- End footer Area -->
+
+
+			<script src={% static "templates/js/vendor/jquery-2.2.4.min.js" %}></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src={% static "templates\js\vendor\bootstrap.min.js" %}></script>			
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src={% static "templates\js\easing.min.js" %}></script>			
+			<script src={% static "templates\js\hoverIntent.js" %}></script>
+			<script src={% static "templates\js\superfish.min.js" %}></script>	
+			<script src={% static "templates\js\jquery.ajaxchimp.min.js" %}></script>
+			<script src={% static "templates\js\jquery.magnific-popup.min.js" %}></script>	
+			<script src={% static "templates\js\owl.carousel.min.js" %}></script>			
+			<script src={% static "templates\js\jquery.sticky.js" %}></script>
+			<script src={% static "templates\js\jquery.sticky.js" %}></script>			
+			<script src={% static "templates\js\parallax.min.js" %}></script>	
+			<script src={% static "templates\js\waypoints.min.js" %}></script>
+			<script src={% static "templates\js\jquery.counterup.min.js" %}></script>					
+			<script src={% static "templates\js\mail-script.js" %}></script>	
+			<script src={% static "templates\js\main.js" %}></script>
+
+</html>

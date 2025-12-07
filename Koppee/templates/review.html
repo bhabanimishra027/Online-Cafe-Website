@@ -1,0 +1,147 @@
+{% extends "base.html" %}
+{% load static %}
+{% block "content" %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Caveat&display=swap');
+
+    body {
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .review-area h1 {
+        font-family: 'Caveat', cursive;
+        font-size: 40px;
+    }
+
+    .single-review {
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    .single-review img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 10px;
+    }
+
+    .single-review .title {
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+
+    .star .fa {
+        color: #FFD700;
+        margin-left: 5px;
+    }
+
+    .counter-row {
+        margin-top: 50px;
+        text-align: center;
+    }
+
+    .single-counter h1 {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .single-counter p {
+        font-size: 18px;
+        color: #666;
+    }
+
+    .review-form textarea,
+    .review-form input {
+        border-radius: 10px;
+    }
+
+    .review-form button {
+        background-color: #6f4e37;
+        color: #fff;
+        border-radius: 10px;
+        padding: 10px 20px;
+        transition: background 0.3s ease;
+    }
+
+    .review-form button:hover {
+        background-color: #8b5e3c;
+    }
+
+    .thank-you-message {
+        color: green;
+        font-weight: 600;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+</style>
+
+<!-- Start Review Area -->
+<section class="review-area section-gap" id="review">
+    <div class="container">
+
+        <!-- Review Form -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-lg-8 review-form">
+                <h3 class="text-center mb-4">Leave a Review</h3>
+
+                {% if thank_you %}
+                    <p class="thank-you-message">{{ thank_you }}</p>
+                {% endif %}
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="file" name="image" class="form-control-file" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="rating" class="form-control" required>
+                            <option value="">Rating</option>
+                            <option value="5">5 - Excellent</option>
+                            <option value="4">4 - Good</option>
+                            <option value="3">3 - Okay</option>
+                            <option value="2">2 - Bad</option>
+                            <option value="1">1 - Terrible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" class="form-control" rows="4" placeholder="Your review..." required></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit">Submit Review</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Display Reviews -->
+        <div class="row">
+            {% for review in review_page %}
+            <div class="col-lg-6 col-md-6 single-review">
+                <img src="{{ review.image.url }}" alt="{{ review.name }}">
+                <div class="title d-flex flex-row">
+                    <h4>{{ review.name }}</h4>
+                    <div class="star">
+                        {% for i in "12345"|slice:":review.rating"|make_list %}
+                            <span class="fa fa-star checked"></span>
+                        {% endfor %}
+                        {% for i in "12345"|slice:"review.rating:"|make_list %}
+                            <span class="fa fa-star"></span>
+                        {% endfor %}
+                    </div>
+                </div>
+                <p>{{ review.message }}</p>
+            </div>
+            {% empty %}
+            <p class="text-center">No reviews yet. Be the first to leave one!</p>
+            {% endfor %}
+        </div>
+        
+    </div>
+</section>
+<!-- End Review Area -->
+{% endblock "content" %}

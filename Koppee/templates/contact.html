@@ -1,0 +1,404 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "content" %}
+<!-- Modern CSS for contact page -->
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+        font-family: 'Inter', sans-serif;
+    }
+    
+    .contact-area {
+        background: linear-gradient(135deg, #8B4513 0%, #A0522D 25%, #CD853F 50%, #D2691E 75%, #8B4513 100%);
+        min-height: 100vh;
+        padding: 80px 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .contact-area::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.05"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.05"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        animation: float 20s ease-in-out infinite;
+    }
+    
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+    
+    .floating-shapes {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        pointer-events: none;
+        overflow: hidden;
+    }
+    
+    .floating-shapes .shape {
+        position: absolute;
+        background: rgba(139, 69, 19, 0.15);
+        border-radius: 50%;
+        animation: floatShapes 15s ease-in-out infinite;
+    }
+    
+    .floating-shapes .shape:nth-child(1) {
+        width: 60px;
+        height: 60px;
+        top: 10%;
+        left: 10%;
+        animation-delay: 0s;
+    }
+    
+    .floating-shapes .shape:nth-child(2) {
+        width: 80px;
+        height: 80px;
+        top: 20%;
+        right: 20%;
+        animation-delay: 3s;
+    }
+    
+    .floating-shapes .shape:nth-child(3) {
+        width: 40px;
+        height: 40px;
+        bottom: 30%;
+        left: 30%;
+        animation-delay: 6s;
+    }
+    
+    .floating-shapes .shape:nth-child(4) {
+        width: 100px;
+        height: 100px;
+        bottom: 10%;
+        right: 10%;
+        animation-delay: 9s;
+    }
+    
+    @keyframes floatShapes {
+        0%, 100% { 
+            transform: translateY(0px) translateX(0px) rotate(0deg); 
+            opacity: 0.1;
+        }
+        50% { 
+            transform: translateY(-20px) translateX(10px) rotate(180deg); 
+            opacity: 0.3;
+        }
+    }
+    
+    .contact-form {
+        background: rgba(255, 248, 240, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(139, 69, 19, 0.2);
+        padding: 50px;
+        border-radius: 24px;
+        box-shadow: 
+            0 25px 50px rgba(139, 69, 19, 0.2),
+            0 0 0 1px rgba(255, 248, 240, 0.1);
+        position: relative;
+        overflow: hidden;
+        transform: translateY(20px);
+        animation: slideUp 0.8s ease-out forwards;
+    }
+    
+    @keyframes slideUp {
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .contact-form::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #8B4513, #A0522D, #CD853F, #D2691E, #8B4513);
+        background-size: 200% 100%;
+        animation: gradientShift 3s ease-in-out infinite;
+    }
+    
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+    
+    .form-control {
+        border: 2px solid rgba(102, 126, 234, 0.1);
+        padding: 16px 20px;
+        margin-bottom: 24px;
+        border-radius: 12px;
+        background-color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+    }
+    
+    .form-control:focus {
+        border-color: #667eea;
+        box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        background-color: rgba(255, 255, 255, 0.95);
+        transform: translateY(-2px);
+    }
+    
+    .form-control::placeholder {
+        color: rgba(118, 75, 162, 0.6);
+        transition: all 0.3s ease;
+    }
+    
+    .form-control:focus::placeholder {
+        color: rgba(118, 75, 162, 0.4);
+        transform: translateY(-2px);
+    }
+    
+    .form-group {
+        position: relative;
+        margin-bottom: 24px;
+    }
+    
+    .form-group::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, #667eea, #764ba2);
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+    
+    .form-group:focus-within::after {
+        transform: scaleX(1);
+    }
+    
+    .btn-coffee {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 18px 40px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        border-radius: 50px;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    }
+    
+    .btn-coffee::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+    }
+    
+    .btn-coffee:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+    
+    .btn-coffee:hover::before {
+        left: 100%;
+    }
+    
+    .btn-coffee:active {
+        transform: translateY(-1px);
+    }
+    
+    .alert {
+        border-radius: 12px;
+        padding: 16px 20px;
+        margin-bottom: 24px;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        animation: slideDown 0.5s ease-out;
+    }
+    
+    @keyframes slideDown {
+        from {
+            transform: translateY(-20px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    
+    .alert-success {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        color: white;
+        box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+    }
+    
+    .alert-danger {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        color: white;
+        box-shadow: 0 8px 25px rgba(250, 112, 154, 0.3);
+    }
+    
+    .section-title h1 {
+        color: white;
+        font-weight: 700;
+        font-size: 3.5rem;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        margin-bottom: 16px;
+        animation: fadeInUp 1s ease-out;
+    }
+    
+    .section-title p {
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 1.2rem;
+        font-weight: 300;
+        animation: fadeInUp 1s ease-out 0.2s both;
+    }
+    
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .contact-form .row {
+        margin-bottom: 8px;
+    }
+    
+    .contact-form .row .col-md-6 {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .contact-form {
+            padding: 30px 20px;
+            margin: 0 15px;
+        }
+        
+        .section-title h1 {
+            font-size: 2.5rem;
+        }
+        
+        .contact-area {
+            padding: 40px 0;
+        }
+    }
+    
+    /* Input focus animations */
+    .form-control {
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .form-control:hover {
+        border-color: rgba(102, 126, 234, 0.3);
+        transform: translateY(-1px);
+    }
+    
+    /* Icon animations */
+    .btn-coffee i {
+        transition: transform 0.3s ease;
+    }
+    
+    .btn-coffee:hover i {
+        transform: translateX(5px);
+    }
+</style>
+
+<!-- Bootstrap CDN -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<section class="contact-area section-gap">
+    <!-- Floating background shapes -->
+    <div class="floating-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-8 text-center section-title">
+                <h1 class="mb-10">Contact Us</h1>
+                <p>Let's start a conversation that matters</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 contact-form">
+                <form method="POST" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            <input type="text" name="name" placeholder="Your Name" required 
+                                   class="form-control">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <input type="email" name="email" placeholder="Your Email" required 
+                                   class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="subject" placeholder="Subject" required 
+                               class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <textarea name="message" placeholder="Your Message" required 
+                                  class="form-control" rows="5"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-coffee">
+                            <i class="fas fa-paper-plane me-2"></i> Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+  // Hide the message after 2 seconds (2000 milliseconds)
+  setTimeout(function() {
+    const msgContainer = document.getElementById('msg-container');
+    if (msgContainer) {
+      msgContainer.style.display = 'none';
+    }
+  }, 2000);
+</script>
+
+<!-- Bootstrap JS and Font Awesome -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+
+{% endblock "content" %}
