@@ -23,7 +23,11 @@
                     <img class="img-fluid mb-2" src="{{ coffee.image.url }}" alt="{{ coffee.name }}">
                     <p>{{ coffee.description|truncatewords:20 }}</p>
                     <a href="{% url 'coffee_detail' coffee.pk %}" class="genric-btn primary">View Details</a>
+                    {% if user.is_authenticated %}
                     <a href="{% url 'create_order' %}" class="genric-btn success">Order Now</a>
+                    {% else %}
+                    <a href="{% url 'login' %}" onclick="alert('To order you have to login first...');" class="genric-btn success">Order Now</a>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

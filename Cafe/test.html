@@ -1,0 +1,720 @@
+
+<!DOCTYPE html>
+<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Coffee</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href=/static/templates/css/linearicons.css>
+			<link rel="stylesheet" href=/static/templates/css/font-awesome.min.css>
+			<link rel="stylesheet" href=/static/templates/css/bootstrap.css>
+			<link rel="stylesheet" href=/static/templates/css/magnific-popup.css>
+			<link rel="stylesheet" href=/static/templates/css/nice-select.css>					
+			<link rel="stylesheet" href=/static/templates/css/animate.min.css>
+			<link rel="stylesheet" href=/static/templates/css/owl.carousel.css>
+			<link rel="stylesheet" href=/static/templates/css/main.css>
+		</head>
+		<body>
+
+<header id="header" id="home">
+    
+    <div class="container">
+        <div class="row align-items-center justify-content-between d-flex">
+            <div id="logo" style="display: flex; align-items: center;">
+                <a href="index.html">
+                    <img src=/static/templates/img/hehehe.png 
+                         alt="Logo" 
+                         style="max-height: 60px; width: auto;">
+                </a>
+            </div>
+            <nav id="nav-menu-container" style="margin-left: 3px; margin-right: 3px";>
+                <ul class="nav-menu">
+					<li class="menu-active"><a href="/">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="#coffee">Coffee</a></li>
+					<li><a href="#review">Review</a></li>
+					<li><a href="/my_orders/">My Orders</a></li>  
+					<li><a href="/contact/">Contact</a></li>     
+					<li><a href="/login/">Login</a></li>
+					<li><a href="/logout/">Logout</a></li>
+				</ul>
+
+            </nav>
+        </div>
+    </div>
+</header>
+
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Poppins:wght@400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fffaf3;
+    color: #3e2c23;
+    animation: fadeIn 0.8s ease-in;
+}
+
+/* HEADINGS */
+h1, h4,h5, h6 {
+    font-family: 'Caveat', cursive;
+    color: #4e2e1f;
+}
+
+h1 {
+    font-size: 44px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+h4 {
+    font-size: 26px;
+    font-weight: 600;
+}
+
+h6 {
+    font-size: 18px;
+    color: #b87256;
+    letter-spacing: 1px;
+}
+
+/* PARAGRAPHS */
+p {
+    font-size: 15.5px;
+    color: #5d4034;
+    line-height: 1.7;
+}
+
+/* TITLES WITH EMOJIS */
+.title h1::after {
+    content: "☕";
+}
+.menu-area h1::after {
+    content: "🫘";
+}
+.gallery-area h1::after {
+    content: "☕";
+}
+.review-area h1::after {
+    content: "❤️";
+}
+.title p::after {
+    content: "✨";
+}
+
+/* PRIMARY BUTTON */
+.primary-btn {
+    background: linear-gradient(135deg, #d7a179, #8b5e3c);
+    color: white !important;
+    font-family: 'Poppins', sans-serif;
+    padding: 13px 32px;
+    border-radius: 30px;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    animation: floatUp 1.3s ease-out;
+}
+
+.primary-btn:hover {
+    background: linear-gradient(135deg, #8b5e3c, #d7a179);
+    transform: scale(1.05);
+    box-shadow: 0 12px 22px rgba(0,0,0,0.2);
+}
+
+/* IMAGE HOVER ZOOM */
+.single-menu img,
+.gallery-area img {
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.single-menu img:hover,
+.gallery-area img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* REVIEW COUNTER */
+.counter {
+    font-family: 'Caveat', cursive;
+    font-size: 36px;
+    color: #a86e58;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(20px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+.btn-review {
+    display: inline-block;
+    background-color: #6f4e37; /* Coffee brown */
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 25px;
+}
+
+.btn-review:hover {
+    background-color: #713f18ff;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+</style>
+<body>
+
+<!-- start banner Area -->
+<section class="banner-area" id="home">	
+    <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+            <div class="banner-content col-lg-7">
+                <h6 class="text-white text-uppercase">Your Daily Dose of Energy</h6>
+                <h1>
+                    Start your day with <br>
+                    a perfect cup of Coffee				
+                </h1>
+                <a href="order" class="primary-btn text-uppercase">Order Now</a>
+            </div>											
+        </div>
+    </div>
+</section>
+<!-- End banner Area -->	
+
+<!-- Start video-sec Area -->
+<section class="video-sec-area pb-100 pt-40" id="about">
+    <div class="container">
+        <div class="row justify-content-start align-items-center">
+            <div class="col-lg-6 video-right justify-content-center align-items-center d-flex position-relative">
+                <div class="overlay overlay-bg"></div>
+                <div class="embed-responsive embed-responsive-16by9 w-100">
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/jhlCWuK0V8s?si=VliCjqCN22JOsckg" title="Coffee Making Live" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                </div>
+            </div>			
+
+            <div class="col-lg-6 video-left">
+                <h6>Live Brewing Experience</h6>
+                <h1>Watch How We <br> Craft Every Cup</h1>
+                <p><span>Freshly roasted. Expertly brewed. Always perfect.</span></p>
+                <p>
+                    Experience the magic behind your favorite coffee. From bean selection to final pour, everything is done with passion and care.
+                </p>
+                <img class="img-fluid" src="/static/templates/img/signature.png" alt="Signature">
+            </div>
+        </div>
+    </div>	
+</section>
+<!-- End video-sec Area -->
+
+<!-- Start menu Area -->
+<section class="menu-area section-gap" id="coffee">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-10">
+                <div class="title text-center">
+                    <h1 class="mb-10" style="font-size: 60px;">Our Coffee Menu</h1>
+                    <h4>Explore our handcrafted brews made with love and care.</h4>
+                </div>
+            </div>
+        </div>				
+
+        <div class="row">
+           <div class="row">
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal1" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Mocha</h4>
+					<p class="price float-right">$15.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/MochaLatte-1200x1200-1.jpg" alt="Mocha" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">A mocha is a coffee beverage that combines espresso, chocolate (syrup or powder…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal1" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel1" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel1">Mocha ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/MochaLatte-1200x1200-1.jpg" alt="Mocha" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">A mocha is a coffee beverage that combines espresso, chocolate (syrup or powder), and steamed milk. 
+It&#x27;s often topped with whipped cream. 
+It&#x27;s a popular variation of a latte, with the addition of chocolate. 
+Mocha can be served hot or iced.</p>
+					<h4 style="color: #a86e58;">💰Price: $15.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal2" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Espresso</h4>
+					<p class="price float-right">$12.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/espresso.webp" alt="Espresso" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">Espresso is made by forcing nearly boiling water through finely-ground coffee b…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal2" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel2" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel2">Espresso ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/espresso.webp" alt="Espresso" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">Espresso is made by forcing nearly boiling water through finely-ground coffee beans, which results in a concentrated, syrup-like coffee drink.</p>
+					<h4 style="color: #a86e58;">💰Price: $12.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal3" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Iced Americano</h4>
+					<p class="price float-right">$10.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/iced_americanp.avif" alt="Iced Americano" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">Iced Americano is essentially hot brewed coffee that is cooled down and served …</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal3" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel3" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel3">Iced Americano ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/iced_americanp.avif" alt="Iced Americano" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">Iced Americano is essentially hot brewed coffee that is cooled down and served over ice. It  is not just popular in the summer months, it is a favourite all year round!</p>
+					<h4 style="color: #a86e58;">💰Price: $10.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal4" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Latte</h4>
+					<p class="price float-right">$15.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/latte.webp" alt="Latte" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">Caffè latte, also known as caffè e latte, caffellatte or caffelatte, is a coffe…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal4" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel4" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel4">Latte ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/latte.webp" alt="Latte" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">Caffè latte, also known as caffè e latte, caffellatte or caffelatte, is a coffee drink of Italian origin made with espresso and steamed milk, traditionally served in a glass.</p>
+					<h4 style="color: #a86e58;">💰Price: $15.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal5" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Affogatto</h4>
+					<p class="price float-right">$12.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/affogato.jpeg" alt="Affogatto" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">Affogato al caffè, is an Italian dessert comprising a scoop of gelato, either f…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal5" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel5" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel5">Affogatto ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/affogato.jpeg" alt="Affogatto" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">Affogato al caffè, is an Italian dessert comprising a scoop of gelato, either fiordilatte or vanilla, topped with espresso.</p>
+					<h4 style="color: #a86e58;">💰Price: $12.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal6" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Frappuccino</h4>
+					<p class="price float-right">$20.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/frappuccino.jpeg" alt="Frappuccino" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">The Frappuccino is a glorious iced coffee drink with whipped cream and flavoure…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal6" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel6" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel6">Frappuccino ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/frappuccino.jpeg" alt="Frappuccino" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">The Frappuccino is a glorious iced coffee drink with whipped cream and flavoured syrups</p>
+					<h4 style="color: #a86e58;">💰Price: $20.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal7" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Macchiato</h4>
+					<p class="price float-right">$16.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/macchiato.jpeg" alt="Macchiato" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">A macchiato is an espresso-based coffee drink with a small amount of steamed mi…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal7" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel7" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel7">Macchiato ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/macchiato.jpeg" alt="Macchiato" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">A macchiato is an espresso-based coffee drink with a small amount of steamed milk added to it.</p>
+					<h4 style="color: #a86e58;">💰Price: $16.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+				<!-- Coffee Item Card -->
+				<div class="single-menu" data-toggle="modal" data-target="#coffeeModal8" style="cursor: pointer; transition: 0.3s ease-in-out; border-radius: 15px; box-shadow: 0 2px 15px rgba(0,0,0,0.1); padding: 15px; margin-bottom: 30px;">
+				<div class="title-div justify-content-between d-flex">
+					<h4>Cappuccino</h4>
+					<p class="price float-right">$20.00</p>
+				</div>
+				<div style="position: relative; width: 100%; padding-bottom: 75%; border-radius: 10px; overflow: hidden;">
+				<img src="/media/coffee_images/960px-Cappuccino_at_Sightglass_Coffee.jpg" alt="Cappuccino" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+				</div>
+				<p style="margin-top: 10px;">Cappuccino is an espresso-based coffee drink traditionally prepared with steame…</p>
+				</div>
+			</div>
+
+			<!-- Modal for each coffee item -->
+			<div class="modal fade" id="coffeeModal8" tabindex="-1" role="dialog" aria-labelledby="coffeeModalLabel8" aria-hidden="true">
+				<div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+				<div class="modal-content" style="border-radius: 20px;">
+					<div class="modal-header" style="border-bottom: none;">
+					<h5 class="modal-title" id="coffeeModalLabel8">Cappuccino ☕</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" style="font-size: 1.5rem;">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					</div>
+					<div class="modal-body text-center">
+					<img src="/media/coffee_images/960px-Cappuccino_at_Sightglass_Coffee.jpg" alt="Cappuccino" class="img-fluid mb-3" style="border-radius: 15px; max-height: 300px; object-fit: cover;">
+					<p style="font-size: 17px;">Cappuccino is an espresso-based coffee drink traditionally prepared with steamed milk, including a layer of milk foam</p>
+					<h4 style="color: #a86e58;">💰Price: $20.00</h4>
+					</div>
+				</div>
+				</div>
+			</div>
+			
+</div>
+
+        </div>	
+
+        <!-- ✅ One Button at the Bottom -->
+        <div class="row mt-4">
+            <div class="col text-center">
+                <a href="/order/" 
+					style="background: linear-gradient(135deg, #6f4e37, #a97458); 
+							color: white; 
+							padding: 12px 30px; 
+							border-radius: 30px; 
+							font-size: 16px; 
+							font-weight: 600; 
+							text-transform: uppercase; 
+							text-decoration: none; 
+							box-shadow: 0 8px 15px rgba(0,0,0,0.1); 
+							transition: all 0.3s ease; 
+							display: inline-block;">
+					Place Your Order
+					</a>
+            </div>
+        </div>
+    </div>	
+</section>
+<!-- End menu Area -->
+
+<!-- Start gallery Area -->
+<section class="gallery-area section-gap" id="gallery">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-10">
+                <div class="title text-center">
+                    <h1 class="mb-10" style="font-size: 60px;">Inside Our Coffee World...</h1>
+                    <h4 style="font-size: 25px;">Get a glimpse of the moments we brew joy into every cup.</h4>
+                </div>
+            </div>
+        </div>						
+        <div class="row">
+            <div class="col-lg-4">
+                <a href=/static/templates/img/g1.jpg class="img-pop-home">
+                    <img class="img-fluid" src=/static/templates/img/g1.jpg alt="">
+                </a>	
+                <a href=/static/templates/img/g2.jpg class="img-pop-home">
+                    <img class="img-fluid" src=/static/templates/img/g2.jpg alt="">
+                </a>	
+            </div>
+            <div class="col-lg-8">
+                <a href=/static/templates/img/g3.jpg class="img-pop-home">
+                    <img class="img-fluid" src=/static/templates/img/g3.jpg alt="">
+                </a>	
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a href=/static/templates/img/g4.jpg class="img-pop-home">
+                            <img class="img-fluid" src=/static/templates/img/g4.jpg alt="">
+                        </a>	
+                    </div>
+                    <div class="col-lg-6">
+                        <a href=/static/templates/img/g5.jpg class="img-pop-home">
+                            <img class="img-fluid" src=/static/templates/img/g5.jpg alt="">
+                        </a>	
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>	
+</section>
+<!-- End gallery Area -->
+
+<!-- Start review Area -->
+<section class="review-area section-gap" id="review">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-10">
+                <div class="title text-center">
+                    <h1 class="mb-10">What Our Customers Say</h1>
+                    <p>We believe in great taste and even better experiences.</p>
+                    
+                    <!-- Add Your Review Button -->
+                    <a href="review" class="btn-review">Add Your Review...❤️</a>
+                </div>
+            </div>
+        </div>						
+        <div class="row">
+            
+            <p class="text-center">No reviews yet. Be the first to leave one!</p>
+            
+        </div>
+
+        <div class="row counter-row">
+            <div class="col-lg-3 col-md-6 single-counter">
+                <h1 class="counter">2536</h1>
+                <p>Happy Customers</p>
+            </div>
+            <div class="col-lg-3 col-md-6 single-counter">
+                <h1 class="counter">7562</h1>
+                <p>Coffee Cups Served</p>
+            </div>
+            <div class="col-lg-3 col-md-6 single-counter">
+                <h1 class="counter">2013</h1>
+                <p>Espresso Shots</p>
+            </div>
+            <div class="col-lg-3 col-md-6 single-counter">
+                <h1 class="counter">10536</h1>
+                <p>Total Orders</p>
+            </div>																		
+        </div>
+    </div>	
+</section>
+
+<!-- End review Area -->
+
+</body>
+
+
+
+<!-- start footer Area -->		
+<footer class="footer-area section-gap">
+	<div class="container">
+		<div class="row">
+			<!-- About Us -->
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>☕About Crimson Beans</h6>
+					<p style="color: white;">
+						Here, we craft every cup with ❤️ and passion. Whether you're here for your daily caffeine fix or a relaxing break, we've got something brewing just for you!
+					</p>
+					<p class="footer-text" style="color: white;" >
+						&copy;<script>document.write(new Date().getFullYear());</script> CoffeeBean | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> and ☕ by our baristas.
+					</p>								
+				</div>
+			</div>
+
+			<!-- Newsletter -->
+			<div class="col-lg-5 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>📬Join Our Newsletter</h6>
+					<p style="color: white;">Get the latest brews, deals, and cozy updates straight to your inbox!</p>
+					<div id="mc_embed_signup">
+						<form target="_blank" novalidate="true" action="https://example.com/subscribe" method="get" class="form-inline">
+							<input class="form-control" name="EMAIL" placeholder="Enter your email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter your email'" required="" type="email">
+							<button class="click-btn btn btn-default"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+							<div style="position: absolute; left: -5000px;">
+								<input name="hidden-field" tabindex="-1" value="" type="text">
+							</div>
+							<div class="info pt-20"></div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Opening Hours -->
+			<div class="footer-top-right col-lg-2 col-md-6 col-sm-6">
+				<div class="single-footer-widget">
+					<h6>🕒Opening Hours</h6>
+					<ul style="list-style-type: none; padding-left: 0;">
+						<li>Mon–Fri: <br><strong>8am – 2pm</strong></li>
+						<li>Sat–Sun: <br><strong>11am – 4pm</strong></li>
+					</ul>
+				</div>
+			</div>
+
+			<!-- Social Media -->
+			<div class="col-lg-2 col-md-6 col-sm-6 social-widget">
+				<div class="single-footer-widget">
+					<h6>📱Follow Us</h6>
+					<p style="color: white;">Stay connected for more coffee love</p>
+					<div class="footer-social d-flex align-items-center">
+						<a href="#"><i class="fa fa-facebook"></i></a>
+						<a href="#"><i class="fa fa-twitter"></i></a>
+						<a href="#"><i class="fa fa-instagram"></i></a>
+						<a href="#"><i class="fa fa-pinterest"></i></a>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</footer>	
+<!-- End footer Area -->
+
+
+			<script src=/static/templates/js/vendor/jquery-2.2.4.min.js></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src=/static/templates/js/vendor/bootstrap.min.js></script>			
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src=/static/templates/js/easing.min.js></script>			
+			<script src=/static/templates/js/hoverIntent.js></script>
+			<script src=/static/templates/js/superfish.min.js></script>	
+			<script src=/static/templates/js/jquery.ajaxchimp.min.js></script>
+			<script src=/static/templates/js/jquery.magnific-popup.min.js></script>	
+			<script src=/static/templates/js/owl.carousel.min.js></script>			
+			<script src=/static/templates/js/jquery.sticky.js></script>
+			<script src=/static/templates/js/jquery.sticky.js></script>			
+			<script src=/static/templates/js/parallax.min.js></script>	
+			<script src=/static/templates/js/waypoints.min.js></script>
+			<script src=/static/templates/js/jquery.counterup.min.js></script>					
+			<script src=/static/templates/js/mail-script.js></script>	
+			<script src=/static/templates/js/main.js></script>
+
+</html>

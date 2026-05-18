@@ -9,7 +9,9 @@ from .models import Coffee, ContactMessage, Order, OrderItem
 # Home Page
 def index_view(request):
     coffees = Coffee.objects.all()
-    return render(request, 'index.html', {'coffees': coffees})
+    from .models import Review
+    reviews = Review.objects.all().order_by('-id')[:6]
+    return render(request, 'index.html', {'coffees': coffees, 'review_view': reviews})
 
 # Menu / Coffee List Page
 def menu_view(request):

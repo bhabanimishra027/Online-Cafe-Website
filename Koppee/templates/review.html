@@ -122,7 +122,13 @@
         <div class="row">
             {% for review in review_page %}
             <div class="col-lg-6 col-md-6 single-review">
-                <img src="{{ review.image.url }}" alt="{{ review.name }}">
+                {% if review.image %}
+                <img src="{{ review.image.url }}" alt="{{ review.name }}" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+                {% else %}
+                <div style="width: 80px; height: 80px; border-radius: 50%; background-color: #d7a179; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold; margin-bottom: 10px; margin-left: auto; margin-right: auto;">
+                    {{ review.name|make_list|first|upper }}
+                </div>
+                {% endif %}
                 <div class="title d-flex flex-row">
                     <h4>{{ review.name }}</h4>
                     <div class="star">
