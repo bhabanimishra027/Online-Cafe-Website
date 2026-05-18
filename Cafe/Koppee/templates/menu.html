@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<section class="menu-area section-gap" id="coffee">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="menu-content pb-60 col-lg-10">
+                <div class="title text-center">
+                    <h1 class="mb-10">Our Coffee Selection</h1>
+                    <p>Who are in extremely love with eco friendly system.</p>
+                </div>
+            </div>
+        </div>						
+        <div class="row">
+            {% for coffee in coffees %}
+            <div class="col-lg-4">
+                <div class="single-menu p-3 border rounded">
+                    <div class="title-div justify-content-between d-flex mb-2">
+                        <h4>{{ coffee.name }}</h4>
+                        <p class="price float-right">${{ coffee.price }}</p>
+                    </div>
+                    <img class="img-fluid mb-2" src="{{ coffee.image.url }}" alt="{{ coffee.name }}">
+                    <p>{{ coffee.description|truncatewords:20 }}</p>
+                    <a href="{% url 'coffee_detail' coffee.pk %}" class="genric-btn primary">View Details</a>
+                    <a href="{% url 'create_order' %}" class="genric-btn success">Order Now</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>	
+</section>
+{% endblock %}

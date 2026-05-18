@@ -1,0 +1,526 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "content" %}
+
+<head>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg,rgb(56, 27, 6) 0%, #D2691E 50%,rgb(243, 150, 69) 100%);
+            min-height: 100vh;
+            color: #3E2723;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .section-gap {
+            padding: 60px 0;
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+        }
+
+        .col-lg-10 {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
+
+        .col-lg-4,
+        .col-md-6 {
+            flex: 0 0 calc(33.333% - 20px);
+            min-width: 320px;
+        }
+
+        .col-lg-12 {
+            flex: 0 0 100%;
+        }
+
+        .menu-content {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .title h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #FFEAA7;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(62,39,35,0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .title p {
+            font-size: 1.2rem;
+            color: #F5E6D3;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .pb-60 {
+            padding-bottom: 60px;
+        }
+
+        .mb-10 {
+            margin-bottom: 10px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        .d-flex {
+            display: flex;
+        }
+
+        .justify-content-center {
+            justify-content: center;
+        }
+
+        .order-item {
+            background: #FFF8E1;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(62,39,35,0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.6s ease-out;
+            border: 2px solid #E6B76A;
+            height: 100%;
+        }
+
+        .order-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(62,39,35,0.3);
+            border-color: #D2691E;
+        }
+
+        .order-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #8B4513, #D2691E, #CD853F);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .order-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .order-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .order-item h4 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #5D4037;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .order-item p {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .coffee-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #BF360C;
+        }
+
+        .quantity-selector {
+            background: #F3E5AB;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 2px solid #DDD8B4;
+            transition: border-color 0.3s ease;
+        }
+
+        .quantity-selector:focus-within {
+            border-color: #D2691E;
+        }
+
+        .quantity-selector label {
+            display: block;
+            font-weight: 600;
+            color: #5D4037;
+            margin-bottom: 10px;
+        }
+
+        .quantity-input {
+            width: 100%;
+            max-width: 80px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border: 2px solid #DDD8B4;
+            border-radius: 10px;
+            background: #FFF8E1;
+            color: #5D4037;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .quantity-input:focus {
+            outline: none;
+            border-color: #D2691E;
+        }
+
+        .item-total {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: #FFEAA7;
+            padding: 15px;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(139,69,19,0.3);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .item-total::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,234,167,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .item-total:hover::before {
+            left: 100%;
+        }
+
+        .primary-btn {
+            background: linear-gradient(135deg, #8B4513, #D2691E);
+            color: #FFEAA7;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(139,69,19,0.4);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid #A0522D;
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(139,69,19,0.5);
+            background: linear-gradient(135deg, #A0522D, #CD853F);
+        }
+
+        .primary-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Fixed cart summary */
+        .cart-summary {
+            position: fixed;
+            top: 110px; /* ⬅️ Increased from 100px to 160px */
+            right: 20px;
+            width: 280px;
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            z-index: 999;
+            font-family: 'Segoe UI', sans-serif;
+            color: #333;
+            text-align: center;
+        }
+
+        
+
+        .cart-summary h5 {
+            color: #5D4037;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+            margin: 0 0 10px 0;
+        }
+
+        .cart-total {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #BF360C;
+            margin: 0;
+        }
+
+        .cart-items {
+            font-size: 0.9rem;
+            color: #6D4C41;
+            margin-bottom: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .col-lg-4,
+            .col-md-6 {
+                flex: 0 0 100%;
+                min-width: auto;
+            }
+            
+            .title h1 {
+                font-size: 2rem;
+            }
+            
+            .cart-summary {
+                position: relative;
+                top: auto;
+                right: auto;
+                margin: 20px 0;
+            }
+
+            .row {
+                gap: 20px;
+            }
+        }
+        .quantity-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .qty-btn {
+            background-color: #D2691E;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .qty-btn:hover {
+            background-color: #A0522D;
+        }
+
+        .quantity-input {
+            max-width: 60px;
+            height: 40px;
+            text-align: center;
+            font-size: 1.2rem;
+            border: 2px solid #DDD8B4;
+            border-radius: 10px;
+            background: #FFF8E1;
+            color: #5D4037;
+            pointer-events: none;
+        }
+        #placeOrderBtn {
+            padding: 10px 20px; /* reduced from something like 14px 30px */
+            font-size: 14px;     /* slightly smaller font */
+            border-radius: 8px;
+            transition: 0.3s ease;
+            isplay: inline-block;
+            margin: 10px auto 0;
+        }
+
+
+
+        /* Animation delays for staggered effect */
+        .order-item:nth-child(1) { animation-delay: 0.1s; }
+        .order-item:nth-child(2) { animation-delay: 0.2s; }
+        .order-item:nth-child(3) { animation-delay: 0.3s; }
+        .order-item:nth-child(4) { animation-delay: 0.4s; }
+        .order-item:nth-child(5) { animation-delay: 0.5s; }
+        .order-item:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+
+<body>
+    <!-- Fixed Cart Summary with Place Order -->
+    <form method="POST" action="{% url 'create_order' %}" id="orderForm">
+        {% csrf_token %}
+        <div class="cart-summary" id="cartSummary">
+            <h5><i class="fas fa-shopping-cart"></i> Your Order</h5>
+            <div class="cart-items" id="cartItems">No items selected</div>
+            <p class="cart-total">Total: $<span id="grandTotal">0.00</span></p>
+            <button type="submit" class="primary-btn mt-2" id="placeOrderBtn">
+                <i class="fas fa-check-circle"></i> Place Order
+            </button>
+        </div>
+
+        <section class="order-area section-gap">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="menu-content pb-60 col-lg-10">
+                        <div class="title text-center">
+                            <h1 class="mb-10"><i class="fas fa-coffee"></i> Place Your Order</h1>
+                            <p>Select the finest coffees for your perfect morning</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    {% for coffee in coffees %}
+                    <div class="col-lg-4 col-md-6">
+                        <div class="order-item">
+                            <img src="{{ coffee.image.url }}" alt="{{ coffee.name }}" class="img-fluid">
+                            <h4>{{ coffee.name }}</h4>
+                            <p>$<span class="coffee-price">{{ coffee.price }}</span></p>
+                            <div class="quantity-selector">
+                                <label><i class="fas fa-plus-circle"></i> Quantity:</label>
+                                <div class="quantity-wrapper">
+                                    <button type="button" class="qty-btn decrement">-</button>
+                                    <input type="text" name="quantity_{{ coffee.id }}" value="0" class="quantity-input" readonly>
+                                    <button type="button" class="qty-btn increment">+</button>
+                                </div>
+                            </div>
+                            <p class="item-total">Total: $<span class="item-total-amount">0.00</span></p>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </form>
+
+    <!-- JS Logic (Unchanged) -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const quantityInputs = document.querySelectorAll('.quantity-input');
+
+            document.querySelectorAll('.order-item').forEach(item => {
+                const incrementBtn = item.querySelector('.increment');
+                const decrementBtn = item.querySelector('.decrement');
+                const input = item.querySelector('.quantity-input');
+
+                incrementBtn.addEventListener('click', () => {
+                    let value = parseInt(input.value) || 0;
+                    input.value = value + 1;
+                    updateItemTotal(input);
+                    updateCartSummary();
+                });
+
+                decrementBtn.addEventListener('click', () => {
+                    let value = parseInt(input.value) || 0;
+                    if (value > 0) {
+                        input.value = value - 1;
+                        updateItemTotal(input);
+                        updateCartSummary();
+                    }
+                });
+            });
+
+            function updateItemTotal(input) {
+                const price = parseFloat(input.closest('.order-item').querySelector('.coffee-price').textContent);
+                const quantity = parseInt(input.value) || 0;
+                const totalElement = input.closest('.order-item').querySelector('.item-total-amount');
+
+                totalElement.textContent = (price * quantity).toFixed(2);
+            }
+
+            function updateCartSummary() {
+                const cartItems = document.getElementById('cartItems');
+                const grandTotal = document.getElementById('grandTotal');
+
+                let total = 0;
+                const items = [];
+
+                quantityInputs.forEach(input => {
+                    const quantity = parseInt(input.value) || 0;
+                    if (quantity > 0) {
+                        const orderItem = input.closest('.order-item');
+                        const coffeeName = orderItem.querySelector('h4').textContent;
+                        const price = parseFloat(orderItem.querySelector('.coffee-price').textContent);
+                        const itemTotal = price * quantity;
+
+                        total += itemTotal;
+                        items.push(`${coffeeName} (${quantity})`);
+                    }
+                });
+
+                grandTotal.textContent = total.toFixed(2);
+
+                if (items.length > 0) {
+                    cartItems.innerHTML = items.join('<br>');
+                } else {
+                    cartItems.textContent = 'No items selected';
+                }
+
+                const orderBtn = document.getElementById('placeOrderBtn');
+                if (total > 0) {
+                    orderBtn.style.opacity = '1';
+                    orderBtn.style.pointerEvents = 'auto';
+                } else {
+                    orderBtn.style.opacity = '0.5';
+                    orderBtn.style.pointerEvents = 'none';
+                }
+            }
+
+            updateCartSummary();
+        });
+    </script>
+</body>
+
+{% endblock "content" %}

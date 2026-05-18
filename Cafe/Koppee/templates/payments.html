@@ -1,0 +1,836 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block "content" %}
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', sans-serif;
+        overflow-x: hidden;
+        background: #0a0a0a;
+    }
+
+    /* Simplified Background */
+    .coffee-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background: linear-gradient(135deg, #b97960ff 0%, #663a26ff 25%, #3e2013ff 50%, #c99950ff 75%, #4b1f04ff 100%);
+        animation: gradientFlow 20s ease-in-out infinite;
+    }
+
+    @keyframes gradientFlow {
+        0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+        50% { filter: hue-rotate(30deg) brightness(1.1); }
+    }
+
+    .error-message {
+        font-weight: 600;
+        text-align: center;
+        max-width: 80%;
+    }
+
+    /* Enhanced Payment Container */
+    .payment-container {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 0;
+        background: rgba(89, 47, 14, 0.95);
+        backdrop-filter: blur(20px);
+        border-radius: 24px;
+        border: 1px solid rgba(218, 165, 32, 0.2);
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.5),
+            0 0 0 1px rgba(218, 165, 32, 0.1),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        position: relative;
+        overflow: hidden;
+        animation: slideInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+    }
+
+    .payment-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0%, 100% { transform: translateX(-100%); }
+        50% { transform: translateX(100%); }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(50px) scale(0.95);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+
+    .payment-header {
+        padding: 40px 40px 20px;
+        text-align: center;
+        position: relative;
+    }
+
+    .payment-header h2 {
+        color: #ffffff;
+        font-size: 2.2rem;
+        font-weight: 700;
+        margin-bottom: 8px;
+        background: linear-gradient(135deg, #D4AF37, #F4E87D);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .payment-header p {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+        font-weight: 400;
+    }
+
+    /* Glassmorphism Order Summary */
+    .order-summary {
+        margin: 0 40px 30px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 24px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .order-summary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(45deg, transparent, rgba(218, 165, 32, 0.03), transparent);
+        pointer-events: none;
+    }
+
+    .order-summary h3 {
+        color: #D4AF37;
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .order-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.9);
+        font-size: 0.95rem;
+    }
+
+    .order-item:last-child {
+        border-bottom: none;
+        margin-top: 8px;
+        padding-top: 16px;
+        border-top: 2px solid rgba(218, 165, 32, 0.3);
+        font-weight: 600;
+        font-size: 1.1rem;
+        color: #D4AF37;
+    }
+
+    .order-item-name {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Enhanced Form Styling */
+    .form-content {
+        padding: 0 40px 40px;
+    }
+
+    .form-group {
+        margin-bottom: 24px;
+        position: relative;
+    }
+
+    .form-group label {
+        display: block;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 8px;
+        transition: color 0.3s ease;
+    }
+
+    .form-group input,
+    .form-group select {
+        width: 100%;
+        padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: #ffffff;
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+        border-color: #D4AF37;
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 3px rgba(218, 165, 32, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .form-group input::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+    }
+
+    .form-group select option {
+        background: #1a1a1a;
+        color: #ffffff;
+    }
+
+    /* Payment method selection with icons */
+    .payment-methods {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .payment-method {
+        position: relative;
+        cursor: pointer;
+    }
+
+    .payment-method input[type="radio"] {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .payment-method-label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .payment-method-label::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(218, 165, 32, 0.1), transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .payment-method input[type="radio"]:checked + .payment-method-label {
+        border-color: #D4AF37;
+        background: rgba(218, 165, 32, 0.1);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(218, 165, 32, 0.2);
+    }
+
+    .payment-method input[type="radio"]:checked + .payment-method-label::before {
+        opacity: 1;
+    }
+
+    .payment-method-icon {
+        font-size: 1.8rem;
+        margin-bottom: 8px;
+        color: #D4AF37;
+    }
+
+    .payment-method-text {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.85rem;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    /* Enhanced Payment Button */
+    .payment-btn {
+        width: 100%;
+        padding: 18px;
+        background: linear-gradient(135deg, #D4AF37 0%, #B8860B 100%);
+        color: #000;
+        border: none;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .payment-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.6s ease;
+    }
+
+    .payment-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px rgba(218, 165, 32, 0.4);
+    }
+
+    .payment-btn:hover::before {
+        left: 100%;
+    }
+
+    .payment-btn:active {
+        transform: translateY(-1px);
+    }
+
+    .payment-btn:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    /* Dynamic payment fields */
+    .payment-fields {
+        opacity: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .payment-fields.active {
+        opacity: 1;
+        max-height: 500px;
+        margin-top: 24px;
+    }
+
+    /* Success Page */
+    .success-section {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .success-section::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="coffee-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="1" fill="white" opacity="0.1"/><circle cx="15" cy="15" r="1" fill="white" opacity="0.1"/><circle cx="10" cy="2" r="0.5" fill="white" opacity="0.05"/><circle cx="2" cy="12" r="0.5" fill="white" opacity="0.05"/><circle cx="18" cy="8" r="0.5" fill="white" opacity="0.05"/></pattern></defs><rect width="100" height="100" fill="url(%23coffee-pattern)"/></svg>');
+        animation: floatPattern 20s ease-in-out infinite;
+    }
+
+    @keyframes floatPattern {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+
+    .success-container {
+        background: rgba(15, 15, 15, 0.95);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(218, 165, 32, 0.2);
+        padding: 60px 40px;
+        border-radius: 24px;
+        box-shadow: 
+            0 25px 50px rgba(0, 0, 0, 0.5),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        text-align: center;
+        max-width: 500px;
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        animation: successAnimation 1s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+    }
+
+    .success-container::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #D4AF37, #B8860B, #D4AF37);
+        background-size: 200% 100%;
+        animation: gradientShift 3s ease-in-out infinite;
+    }
+
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    @keyframes successAnimation {
+        0% {
+            opacity: 0;
+            transform: scale(0.8) translateY(50px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 30px;
+        background: linear-gradient(135deg, #D4AF37, #B8860B);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        animation: successIconPulse 2s ease-in-out infinite;
+    }
+
+    .success-icon::before {
+        content: '✓';
+        color: #000;
+        font-size: 2.5rem;
+        font-weight: bold;
+    }
+
+    .success-icon::after {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border: 2px solid rgba(218, 165, 32, 0.3);
+        border-radius: 50%;
+        animation: ripple 2s ease-out infinite;
+    }
+
+    @keyframes successIconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @keyframes ripple {
+        0% {
+            transform: scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: scale(1.4);
+            opacity: 0;
+        }
+    }
+
+    .success-container h2 {
+        color: #D4AF37;
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #D4AF37, #F4E87D);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        position: relative;
+    }
+
+    .success-container h2::after {
+        content: '☕';
+        position: absolute;
+        top: -20px;
+        right: -60px;
+        font-size: 2rem;
+        opacity: 0.7;
+        animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+
+    .success-container p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        line-height: 1.6;
+    }
+
+    .success-actions {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .genric-btn {
+        padding: 14px 28px;
+        background: linear-gradient(135deg, #D4AF37, #B8860B);
+        color: #000;
+        text-decoration: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .genric-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        transition: left 0.5s ease;
+    }
+
+    .genric-btn:hover::before {
+        left: 100%;
+    }
+
+    .genric-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(218, 165, 32, 0.3);
+        text-decoration: none;
+        color: #000;
+    }
+
+    .genric-btn.success {
+        background: transparent;
+        border: 1px solid rgba(218, 165, 32, 0.5);
+        color: #D4AF37;
+    }
+
+    .genric-btn.success:hover {
+        background: rgba(218, 165, 32, 0.1);
+        color: #D4AF37;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .payment-container {
+            margin: 20px;
+            max-width: none;
+        }
+
+        .payment-header,
+        .form-content {
+            padding-left: 24px;
+            padding-right: 24px;
+        }
+
+        .order-summary {
+            margin-left: 24px;
+            margin-right: 24px;
+        }
+
+        .payment-methods {
+            grid-template-columns: 1fr;
+        }
+
+        .success-container {
+            padding: 40px 24px;
+        }
+
+        .success-container h2::after {
+            right: -30px;
+            font-size: 1.5rem;
+        }
+
+        .success-actions {
+            flex-direction: column;
+        }
+
+        .genric-btn {
+            text-align: center;
+        }
+    }
+</style>
+
+<!-- Simplified background without particles -->
+<div class="coffee-background"></div>
+
+{% if not payment_success %}
+<!-- Payment Form -->
+<div class="payment-container">
+    <div class="payment-header">
+        <h2>☕ Confirm Payment</h2>
+        <p>Secure payment processing</p>
+    </div>
+
+    <div class="order-summary">
+        <h3>🧾 Order Summary</h3>
+        {% for item in create_order_view %}
+            <div class="order-item">
+                <div class="order-item-name">
+                    <span>☕</span>
+                    <span>{{ item.coffee.name }} (x{{ item.quantity }})</span>
+                </div>
+                <span>${{ item.price|floatformat:2 }}</span>
+            </div>
+        {% empty %}
+            <div class="order-item">
+                <div class="order-item-name">
+                    <span>📝</span>
+                    <span>No items in this order</span>
+                </div>
+                <span>$0.00</span>
+            </div>
+        {% endfor %}
+        <div class="order-item">
+            <div class="order-item-name">
+                <span>💰</span>
+                <span>Total Amount</span>
+            </div>
+            <span>${{ total|floatformat:2 }}</span>
+        </div>
+    </div>
+
+    <form method="POST" action="{% url 'confirm_payment' %}" class="form-content" id="paymentForm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label>Choose Payment Method</label>
+            <div class="payment-methods">
+                <div class="payment-method">
+                    <input type="radio" id="card" name="payment_method" value="card" required>
+                    <label for="card" class="payment-method-label">
+                        <div class="payment-method-icon">💳</div>
+                        <span class="payment-method-text">Card</span>
+                    </label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="upi" name="payment_method" value="upi" required>
+                    <label for="upi" class="payment-method-label">
+                        <div class="payment-method-icon">📱</div>
+                        <span class="payment-method-text">UPI</span>
+                    </label>
+                </div>
+                <div class="payment-method">
+                    <input type="radio" id="cod" name="payment_method" value="cod" required>
+                    <label for="cod" class="payment-method-label">
+                        <div class="payment-method-icon">💵</div>
+                        <span class="payment-method-text">Cash</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Payment Fields -->
+        <div id="cardFields" class="payment-fields">
+            <div class="form-group">
+                <label for="cardName">Cardholder Name</label>
+                <input type="text" id="cardName" name="name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label for="cardNumber">Card Number</label>
+                <input type="text" id="cardNumber" name="card" placeholder="1234 5678 9012 3456" maxlength="19">
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label for="expiry">Expiry Date</label>
+                    <input type="text" id="expiry" name="expiry" placeholder="MM/YY">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="4">
+                </div>
+            </div>
+        </div>
+
+        <!-- UPI Fields -->
+        <div id="upiFields" class="payment-fields">
+            <div class="form-group">
+                <label for="upiId">UPI ID</label>
+                <input type="text" id="upiId" name="upi_id" placeholder="yourname@upi">
+            </div>
+        </div>
+
+        <button type="submit" class="payment-btn">
+            🔒 Complete Payment
+        </button>
+    </form>
+</div>
+
+{% else %}
+<!-- Success Page without floating beans -->
+<section class="success-section">
+    <div class="success-container">
+        <!-- Success icon -->
+        <div class="success-icon"></div>
+        
+        <h2>Thank You!</h2>
+        <p>Your order has been placed successfully. We'll have your coffee ready shortly!</p>
+        
+        <div class="success-actions">
+            <a href="{% url 'my_orders' %}" class="genric-btn primary">View My Orders</a>
+            <a href="{% url 'create_order' %}" class="genric-btn success">Continue Browsing</a>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<script>
+    // Simplified JavaScript without particle animations
+    function setupPaymentForm() {
+        const paymentMethods = document.querySelectorAll('input[name="payment_method"]');
+        const cardFields = document.getElementById('cardFields');
+        const upiFields = document.getElementById('upiFields');
+        
+        paymentMethods.forEach(method => {
+            method.addEventListener('change', function() {
+                if (this.value === 'card') {
+                    cardFields.classList.add('active');
+                    upiFields.classList.remove('active');
+                } else if (this.value === 'upi') {
+                    upiFields.classList.add('active');
+                    cardFields.classList.remove('active');
+                } else {
+                    cardFields.classList.remove('active');
+                    upiFields.classList.remove('active');
+                }
+            });
+        });
+
+        // Format card number input
+        const cardNumberInput = document.getElementById('cardNumber');
+        if (cardNumberInput) {
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\s+/g, '');
+                if (value.length > 0) {
+                    value = value.match(new RegExp('.{1,4}', 'g')).join(' ');
+                }
+                this.value = value;
+            });
+        }
+
+        // Format expiry date input
+        const expiryInput = document.getElementById('expiry');
+        if (expiryInput) {
+            expiryInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                this.value = value;
+            });
+        }
+
+        // Form submission handling
+        const paymentForm = document.getElementById('paymentForm');
+        if (paymentForm) {
+            paymentForm.addEventListener('submit', function(e) {
+                const submitBtn = this.querySelector('button[type="submit"]');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner"></span> Processing...';
+            });
+        }
+    }
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        if (!document.querySelector('.success-section')) {
+            setupPaymentForm();
+        }
+        
+        // Add subtle hover effect to buttons
+        const buttons = document.querySelectorAll('button, .genric-btn');
+        buttons.forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    });
+
+    // Handle form errors from Django
+    {% if form.errors %}
+        document.addEventListener('DOMContentLoaded', function() {
+            const firstErrorField = document.querySelector('[name="{{ form.errors.keys.0 }}"]');
+            if (firstErrorField) {
+                firstErrorField.focus();
+                firstErrorField.style.animation = 'shake 0.5s ease-in-out';
+                firstErrorField.style.borderColor = '#ff6b6b';
+                
+                setTimeout(() => {
+                    firstErrorField.style.animation = '';
+                }, 500);
+                
+                const errorContainer = document.createElement('div');
+                errorContainer.className = 'error-message';
+                errorContainer.style.color = '#ff6b6b';
+                errorContainer.style.marginTop = '10px';
+                errorContainer.style.padding = '10px';
+                errorContainer.style.backgroundColor = 'rgba(255, 107, 107, 0.1)';
+                errorContainer.style.borderRadius = '8px';
+                errorContainer.innerHTML = `${Object.values(form.errors)[0][0]}`;
+                
+                firstErrorField.parentNode.appendChild(errorContainer);
+                
+                firstErrorField.addEventListener('input', function() {
+                    errorContainer.remove();
+                    this.style.borderColor = '';
+                }, { once: true });
+            }
+        });
+    {% endif %}
+</script>
+{% endblock %}
